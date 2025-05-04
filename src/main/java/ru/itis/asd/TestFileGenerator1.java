@@ -20,7 +20,7 @@ public class TestFileGenerator1 {
             System.out.println("Создано " + numGraphs + " графов.");
 
             for (int i = 0; i < numGraphs; i++) {
-                int vertices = random.nextInt(120) + 10; // Количество вершин от 10 до 130
+                int vertices = random.nextInt(120) + 10;
                 // Минимальное количество рёбер для связности - (vertices-1)
                 // Максимальное - vertices*(vertices-1) для орграфа
                 int maxPossibleEdges = vertices * (vertices - 1);

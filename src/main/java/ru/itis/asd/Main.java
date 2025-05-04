@@ -56,7 +56,7 @@ public class Main {
         statuses[start] = Status.M1;
 
         List<Integer> m0 = new ArrayList();
-        Queue<Integer> m1 = new PriorityQueue();
+        Queue<Integer> m1 = new LinkedList();
         List<Integer> m2 = new ArrayList();
 
         m1.add(start);
