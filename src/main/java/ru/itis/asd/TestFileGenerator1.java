@@ -3,9 +3,7 @@ package ru.itis.asd;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
 import java.io.File;
 
 public class TestFileGenerator1 {
@@ -20,55 +18,21 @@ public class TestFileGenerator1 {
             System.out.println("Создано " + numGraphs + " графов.");
 
             for (int i = 0; i < numGraphs; i++) {
-                int vertices = random.nextInt(120) + 10;
-                // Минимальное количество рёбер для связности - (vertices-1)
-                // Максимальное - vertices*(vertices-1) для орграфа
-                int maxPossibleEdges = vertices * (vertices - 1);
-                int edges = random.nextInt(maxPossibleEdges - (vertices - 1)) + (vertices - 1);
+                //writer.write("Это граф" + "\n"); проверил, что графы создаются
+                int vertices = random.nextInt(100,1000); // Сгенерируем количество вершин от 10 до 130
+                int edges = random.nextInt(vertices * (vertices - 1) / 2) + 1; // // Случайное количество рёбер
 
                 writer.write(vertices + " " + edges + "\n");
 
-                // Сначала создаём остовное дерево (гарантирует связность)
-                List<Integer> notConnected = new ArrayList<>();
-                List<Integer> connected = new ArrayList<>();
-
-                // Начинаем с вершины 0
-                connected.add(0);
-                for (int v = 1; v < vertices; v++) {
-                    notConnected.add(v);
-                }
-
-                // Список всех рёбер
-                List<String> allEdges = new ArrayList<>();
-
-                // Добавляем рёбра остовного дерева
-                while (!notConnected.isEmpty()) {
-                    int source = connected.get(random.nextInt(connected.size()));
-                    int destination = notConnected.remove(random.nextInt(notConnected.size()));
-                    connected.add(destination);
-
-                    int weight = random.nextInt(100);
-                    allEdges.add(source + " " + destination + " " + weight);
-                }
-
-                // Теперь добавляем оставшиеся рёбра
-                for (int j = vertices - 1; j < edges; j++) {
-                    int source, destination;
-                    do {
-                        source = random.nextInt(vertices);
-                        destination = random.nextInt(vertices);
-                    } while (source == destination || edgeExists(allEdges, source, destination));
-
-                    int weight = random.nextInt(100);
-                    allEdges.add(source + " " + destination + " " + weight);
-                }
-
-                // Перемешиваем рёбра для случайного порядка
-                Collections.shuffle(allEdges, random);
-
-                // Записываем все рёбра
-                for (String edge : allEdges) {
-                    writer.write(edge + "\n");
+                // Записываем каждое ребро
+                for (int j = 0; j < edges; j++) {
+                    int source = random.nextInt(vertices);
+                    int destination = random.nextInt(vertices);
+                    while (destination == source) {
+                        destination = random.nextInt(vertices); // Убедимся, что пункт назначения отличается от источника
+                    }
+                    int weight = random.nextInt(100); // Сгенерируйте случайный вес для ребра
+                    writer.write(source + " " + destination + " " + weight + "\n");
                 }
             }
 
@@ -77,18 +41,5 @@ public class TestFileGenerator1 {
         } catch (IOException e) {
             System.out.println("Ошибка во время создания файла: " + e.getMessage());
         }
-    }
-
-    // Проверяет, существует ли уже такое ребро в списке
-    private static boolean edgeExists(List<String> edges, int source, int destination) {
-        for (String edge : edges) {
-            String[] parts = edge.split(" ");
-            int s = Integer.parseInt(parts[0]);
-            int d = Integer.parseInt(parts[1]);
-            if (s == source && d == destination) {
-                return true;
-            }
-        }
-        return false;
     }
 }
