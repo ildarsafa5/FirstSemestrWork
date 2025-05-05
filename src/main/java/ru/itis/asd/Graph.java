@@ -6,31 +6,23 @@ public class Graph {
     private int vertices;
     private int edges;
 
+    // список списков исходящих рёбер для каждой вершины
     private ArrayList<ArrayList<Edge>> edgesOfvertices = new ArrayList();
 
     public int getVertices() {
         return vertices;
     }
 
-    public void setVertices(int vertices) {
-        this.vertices = vertices;
-    }
 
     public int getEdges() {
         return edges;
     }
 
-    public void setEdges(int edges) {
-        this.edges = edges;
-    }
 
     public ArrayList<ArrayList<Edge>> getEdgesOfvertices() {
         return edgesOfvertices;
     }
 
-    public void setEdgesOfvertices(ArrayList<ArrayList<Edge>> edgesOfvertices) {
-        this.edgesOfvertices = edgesOfvertices;
-    }
 
     public Graph(int vertices, int edges) {
         this.edges = edges;
@@ -51,7 +43,7 @@ public class Graph {
             this.start = start;
         }
     }
-
+    // метод, добавляющий по начальной, конечной вершинам и весу новое ребро в структуру рёбер
     public void addEdge(Integer[] array) {
         if (array.length!=3) {
             throw new RuntimeException();

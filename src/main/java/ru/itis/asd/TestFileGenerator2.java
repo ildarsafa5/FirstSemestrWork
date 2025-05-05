@@ -16,11 +16,11 @@ public class TestFileGenerator2 {
         try {
             FileWriter writer = new FileWriter(new File(filename));
 
-            int numGraphs = random.nextInt(51) + 50; // 50-100 графов
+            int numGraphs = random.nextInt(51) + 50; // Генерируем количество графов в файле
             System.out.println("Создано " + numGraphs + " графов.");
 
             for (int i = 0; i < numGraphs; i++) {
-                int vertices = random.nextInt(120) + 10; // 10-130 вершин
+                int vertices = random.nextInt(120) + 10; // Генерация 10-130 вершин
 
                 // Базовое количество рёбер пропорционально количеству вершин
                 int baseEdges = vertices * (vertices - 1) / 4; // Ориентировочно 25% от максимального

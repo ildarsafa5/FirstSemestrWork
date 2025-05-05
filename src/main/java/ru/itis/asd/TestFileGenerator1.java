@@ -19,7 +19,7 @@ public class TestFileGenerator1 {
 
             for (int i = 0; i < numGraphs; i++) {
                 //writer.write("Это граф" + "\n"); проверил, что графы создаются
-                int vertices = random.nextInt(100,1000); // Сгенерируем количество вершин от 10 до 130
+                int vertices = random.nextInt(100,1000); // Генерация вершин от 100 до 1000
                 int edges = random.nextInt(vertices * (vertices - 1) / 2) + 1; // // Случайное количество рёбер
 
                 writer.write(vertices + " " + edges + "\n");
